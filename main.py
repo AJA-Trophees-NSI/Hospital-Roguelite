@@ -10,6 +10,9 @@ class Game(Window):
     def __init__(self):
         super().__init__(800, 600, "Hospital Roguelite", resizable=True)
         set_background_color(color.BLUE)
+        self.tileWidth = 40
+        self.tileHeight = 19
+        self.floortile1 = "pixilart/floortile1.png"
 
 
 
