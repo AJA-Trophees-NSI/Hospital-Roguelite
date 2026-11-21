@@ -1,6 +1,7 @@
 from arcade import *
 import arcade
 from random import *
+from arcade.texture.transforms import FlipLeftRightTransform
 
 # cSpell:ignore Roguelite
 
@@ -33,16 +34,19 @@ class Game(Window):
         }
 
         super().__init__(800, 600, "Hospital Roguelite", resizable=True)
-        self.tileWidth = 40
-        self.tileHeight = 19
+        sheet = load_spritesheet("pixilart/SpriteSheetV1.01.png")
+        self.w = 40
+        self.h = 19
         self.tiles = {
-            "ft1": ["pixilart/floortile1.png", "pixilart/floortile2.png", "pixilart/floortile3.png"]
+            "ft1": [sheet.get_texture(LBWH(80, self.h*5, 40, 19)),sheet.get_texture(LBWH(80, self.h*6, 40, 19)), sheet.get_texture(LBWH(80, self.h*7, 40, 19)), sheet.get_texture(LBWH(80, self.h*8, 40, 19))]
         }
 
         for room in self.rooms:
             self.rooms[room].sort(key=lambda tile: (tile[1][0] + tile[1][1]) / 2, reverse=True)
             for tile in self.rooms[room]:
-                tile[0] = load_texture(self.tiles[tile[0]][randint(0,2)])
+                tile[0] = (self.tiles[tile[0]][randint(0,3)])
+                if randint(0,1) == 0:
+                    tile[0] = tile[0].transform(FlipLeftRightTransform)
 
         self.player = Player()
         self.moveLeft = False
@@ -107,13 +111,53 @@ class Game(Window):
         self.camera.use()
 
         for tile, (x, y) in self.rooms["1"]:
-            screenX = (-x + y) * self.tileWidth / 2
-            screenY = (x + y) * self.tileHeight / 2
+            screenX = (-x + y) * self.w / 2
+            screenY = (x + y) * self.h / 2
 
             draw_texture_rect(
                 tile,
-                XYWH(screenX, screenY - self.tileHeight / 2, self.tileWidth, self.tileHeight)
+                XYWH(screenX, screenY - self.h / 2, self.w, self.h)
             )
+
+        screenX = (-self.player.x + self.player.y) * self.tileWidth / 2
+        screenY = (self.player.x + self.player.y) * self.tileHeight / 2
+
+        draw_texture_rect(
+            self.player.texture,
+            XYWH(
+                screenX,
+                screenY - self.tileHeight / 2,
+                24,
+                33,
+            )
+        )
+
+    def on_resize(self, width, height):
+        super().on_resize(width, height)
+
+        self.camera.match_window()
+
+        scale = min(
+            width / 800,
+            height / 600,
+        )
+
+        self.camera.zoom = scale
+
+class Player:
+    """
+    The player handling class.
+    """
+
+    def __init__(self):
+        self.x = 5
+        self.y = 5
+        self.speed = 3.0
+        self.texture = load_texture("pixilart/tempPlayer.png")
+
+    def move(self, dx, dy, delta_time):
+        self.x = max(0.5, min(10.0, self.x + dx * self.speed * delta_time))
+        self.y = max(0.5, min(10.0, self.y + dy * self.speed * delta_time))
 
         screenX = (-self.player.x + self.player.y) * self.tileWidth / 2
         screenY = (self.player.x + self.player.y) * self.tileHeight / 2
