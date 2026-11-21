@@ -116,7 +116,8 @@ class Game(Window):
 
             draw_texture_rect(
                 tile,
-                XYWH(screenX, screenY - self.h / 2, self.w, self.h)
+                XYWH(screenX, screenY - self.h / 2, self.w, self.h),
+                pixelated=True
             )
 
         screenX = (-self.player.x + self.player.y) * self.w / 2
@@ -129,7 +130,8 @@ class Game(Window):
                 screenY - self.h / 2,
                 24,
                 33,
-            )
+            ),
+            pixelated=True
         )
 
     def on_resize(self, width, height):
