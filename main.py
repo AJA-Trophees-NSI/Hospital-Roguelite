@@ -1,12 +1,11 @@
 from arcade import *
+import arcade
 from random import *
 
 # cSpell:ignore Roguelite
 
 class Game(Window):
-    """
-    The main class for the game.
-    """
+    
 
     def __init__(self):
         self.rooms = {
@@ -45,18 +44,116 @@ class Game(Window):
             for tile in self.rooms[room]:
                 tile[0] = load_texture(self.tiles[tile[0]][randint(0,2)])
 
+        self.player = Player()
+        self.moveLeft = False
+        self.moveRight = False
+        self.moveUp = False
+        self.moveDown = False
+
+        self.camera = arcade.Camera2D()
+
+    def on_key_press(self, key, modifiers):
+        if key == arcade.key.W:
+            self.moveUp = True
+        elif key == arcade.key.S:
+            self.moveDown = True
+        elif key == arcade.key.A:
+            self.moveLeft = True
+        elif key == arcade.key.D:
+            self.moveRight = True
+
+    def on_key_release(self, key, modifiers):
+        if key == arcade.key.W:
+            self.moveUp = False
+        elif key == arcade.key.S:
+            self.moveDown = False
+        elif key == arcade.key.A:
+            self.moveLeft = False
+        elif key == arcade.key.D:
+            self.moveRight = False
+
+    def on_update(self, delta_time):
+        dx = 0
+        dy = 0
+
+        if self.moveUp:
+            dx += 1
+            dy += 1
+        if self.moveDown:
+            dx -= 1
+            dy -= 1
+        if self.moveLeft:
+            dx += 1
+            dy -= 1
+        if self.moveRight:
+            dx -= 1
+            dy += 1
+
+        target_x = (-self.player.x + self.player.y) * self.tileWidth / 2
+        target_y = (self.player.x + self.player.y) * self.tileHeight / 2
+
+        smoothing = 1 - pow(0.001, delta_time)
+        current_x, current_y = self.camera.position
+
+        self.camera.position = (
+            current_x + (target_x - current_x) * smoothing,
+            current_y + (target_y - current_y) * smoothing,
+        )
+
+        self.player.move(dx, dy, delta_time)
 
     def on_draw(self):
         self.clear()
+        self.camera.use()
 
         for tile, (x, y) in self.rooms["1"]:
-            screenX = self.width / 2 + (-x + y) * self.tileWidth / 2
-            screenY = 300 + (x + y) * self.tileHeight / 2 # Change 300 to change vertical pos
+            screenX = (-x + y) * self.tileWidth / 2
+            screenY = (x + y) * self.tileHeight / 2
 
             draw_texture_rect(
                 tile,
                 XYWH(screenX, screenY - self.tileHeight / 2, self.tileWidth, self.tileHeight)
             )
+
+        screenX = (-self.player.x + self.player.y) * self.tileWidth / 2
+        screenY = (self.player.x + self.player.y) * self.tileHeight / 2
+
+        draw_texture_rect(
+            self.player.texture,
+            XYWH(
+                screenX,
+                screenY - self.tileHeight / 2,
+                24,
+                33,
+            )
+        )
+
+    def on_resize(self, width, height):
+        super().on_resize(width, height)
+
+        self.camera.match_window()
+
+        scale = min(
+            width / 800,
+            height / 600,
+        )
+
+        self.camera.zoom = scale
+
+class Player:
+    """
+    The player handling class.
+    """
+
+    def __init__(self):
+        self.x = 5
+        self.y = 5
+        self.speed = 3.0
+        self.texture = load_texture("pixilart/tempPlayer.png")
+
+    def move(self, dx, dy, delta_time):
+        self.x = max(0.5, min(10.0, self.x + dx * self.speed * delta_time))
+        self.y = max(0.5, min(10.0, self.y + dy * self.speed * delta_time))
 
 
 
