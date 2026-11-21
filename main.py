@@ -1,5 +1,6 @@
 from arcade import *
 from random import *
+from arcade.texture.transforms import FlipLeftRightTransform
 
 # cSpell:ignore Roguelite
 
@@ -34,28 +35,31 @@ class Game(Window):
         }
 
         super().__init__(800, 600, "Hospital Roguelite", resizable=True)
-        self.tileWidth = 40
-        self.tileHeight = 19
+        sheet = load_spritesheet("pixilart/SpriteSheetV1.01.png")
+        self.w = 40
+        self.h = 19
         self.tiles = {
-            "ft1": ["pixilart/floortile1.png", "pixilart/floortile2.png", "pixilart/floortile3.png"]
+            "ft1": [sheet.get_texture(LBWH(80, self.h*5, 40, 19)),sheet.get_texture(LBWH(80, self.h*6, 40, 19)), sheet.get_texture(LBWH(80, self.h*7, 40, 19)), sheet.get_texture(LBWH(80, self.h*8, 40, 19))]
         }
 
         for room in self.rooms:
             self.rooms[room].sort(key=lambda tile: (tile[1][0] + tile[1][1]) / 2, reverse=True)
             for tile in self.rooms[room]:
-                tile[0] = load_texture(self.tiles[tile[0]][randint(0,2)])
+                tile[0] = (self.tiles[tile[0]][randint(0,3)])
+                if randint(0,1) == 0:
+                     tile[0] = tile[0].transform(FlipLeftRightTransform)
 
 
     def on_draw(self):
         self.clear()
 
         for tile, (x, y) in self.rooms["1"]:
-            screenX = self.width / 2 + (-x + y) * self.tileWidth / 2
-            screenY = 300 + (x + y) * self.tileHeight / 2 # Change 300 to change vertical pos
+            screenX = self.width / 2 + (-x + y) * self.w / 2
+            screenY = 300 + (x + y) * self.h / 2 # Change 300 to change vertical pos
 
             draw_texture_rect(
                 tile,
-                XYWH(screenX, screenY - self.tileHeight / 2, self.tileWidth, self.tileHeight)
+                XYWH(screenX, screenY - self.h / 2, self.w, self.h)
             )
 
 
