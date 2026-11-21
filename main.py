@@ -93,8 +93,8 @@ class Game(Window):
             dx -= 1
             dy += 1
 
-        target_x = (-self.player.x + self.player.y) * self.tileWidth / 2
-        target_y = (self.player.x + self.player.y) * self.tileHeight / 2
+        target_x = (-self.player.x + self.player.y) * self.w / 2
+        target_y = (self.player.x + self.player.y) * self.h / 2
 
         smoothing = 1 - pow(0.001, delta_time)
         current_x, current_y = self.camera.position
@@ -119,14 +119,14 @@ class Game(Window):
                 XYWH(screenX, screenY - self.h / 2, self.w, self.h)
             )
 
-        screenX = (-self.player.x + self.player.y) * self.tileWidth / 2
-        screenY = (self.player.x + self.player.y) * self.tileHeight / 2
+        screenX = (-self.player.x + self.player.y) * self.w / 2
+        screenY = (self.player.x + self.player.y) * self.h / 2
 
         draw_texture_rect(
             self.player.texture,
             XYWH(
                 screenX,
-                screenY - self.tileHeight / 2,
+                screenY - self.h / 2,
                 24,
                 33,
             )
@@ -159,14 +159,14 @@ class Player:
         self.x = max(0.5, min(10.0, self.x + dx * self.speed * delta_time))
         self.y = max(0.5, min(10.0, self.y + dy * self.speed * delta_time))
 
-        screenX = (-self.player.x + self.player.y) * self.tileWidth / 2
-        screenY = (self.player.x + self.player.y) * self.tileHeight / 2
+        screenX = (-self.player.x + self.player.y) * self.w / 2
+        screenY = (self.player.x + self.player.y) * self.h / 2
 
         draw_texture_rect(
             self.player.texture,
             XYWH(
                 screenX,
-                screenY - self.tileHeight / 2,
+                screenY - self.h / 2,
                 24,
                 33,
             )
