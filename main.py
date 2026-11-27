@@ -146,6 +146,36 @@ class Game(Window):
 
         self.camera.zoom = scale
 
+class Map:
+    """
+    The map setup handling class.
+    """
+
+    def __init__(self, difficulty):
+        self.rooms = ["1", "Elevator", ""]
+        self.levelMap = []
+        self.curLevel = 1
+        self.difficulty = difficulty
+
+    def buildLevel(self):
+        """Chooses which rooms are where according to the current level"""
+        self.levelMap = [
+                                                                    ["ft1", (6,6)],
+                                                            ["ft1", (6,5)], ["ft1", (5,6)],
+                                                    ["ft1", (6,4)], ["ft1", (5,5)], ["ft1", (4,6)],
+                                            ["ft1", (6,3)], ["ft1", (5,4)], ["ft1", (4,5)], ["ft1", (3,6)],
+                                    ["ft1", (6,2)], ["ft1", (5,3)], ["ft1", (4,4)], ["ft1", (3,5)], ["ft1", (2,6)],
+                            ["ft1", (6,1)], ["ft1", (5,2)], ["ft1", (4,3)], ["ft1", (3,4)], ["ft1", (2,5)], ["ft1", (1,6)],
+                    ["ft1", (6,0)], ["ft1", (5,1)], ["ft1", (4,2)], ["ft1", (3,3)], ["ft1", (2,4)], ["ft1", (1,5)], ["ft1", (0,6)],
+                            ["ft1", (5,0)], ["ft1", (4,1)], ["ft1", (3,2)], ["ft1", (2,3)], ["ft1", (1,4)], ["ft1", (0,5)],
+                                    ["ft1", (4,0)], ["ft1", (3,1)], ["ft1", (2,2)], ["ft1", (1,3)], ["ft1", (0,4)],
+                                            ["ft1", (3,0)], ["ft1", (2,1)], ["ft1", (1,2)], ["ft1", (0,3)],
+                                                    ["ft1", (2,0)], ["ft1", (1,1)], ["ft1", (0,2)],
+                                                            ["ft1", (1,0)], ["ft1", (0,1)],
+                                                                    ["ft1", (0,0)]
+            ]
+
+
 class Player:
     """
     The player handling class.
