@@ -38,13 +38,13 @@ class Game(Window):
         self.w = 40
         self.h = 19
         self.tiles = {
-            "ft1": [sheet.get_texture(LBWH(80, self.h*5, 40, 19)),sheet.get_texture(LBWH(80, self.h*6, 40, 19)), sheet.get_texture(LBWH(80, self.h*7, 40, 19)), sheet.get_texture(LBWH(80, self.h*8, 40, 19))]
+            "ft1": [sheet.get_texture(LBWH(80, 0, 40, 19)),sheet.get_texture(LBWH(80, self.h*1, 40, 19)),sheet.get_texture(LBWH(80, self.h*2, 40, 19)), sheet.get_texture(LBWH(80, self.h*3, 40, 19)), sheet.get_texture(LBWH(80, self.h*4, 40, 19)),sheet.get_texture(LBWH(80, self.h*5, 40, 19)),sheet.get_texture(LBWH(80, self.h*6, 40, 19)), sheet.get_texture(LBWH(80, self.h*7, 40, 19)), sheet.get_texture(LBWH(80, self.h*8, 40, 19))]
         }
 
         for room in self.rooms:
             self.rooms[room].sort(key=lambda tile: (tile[1][0] + tile[1][1]) / 2, reverse=True)
             for tile in self.rooms[room]:
-                tile[0] = (self.tiles[tile[0]][randint(0,3)])
+                tile[0] = (self.tiles[tile[0]][randint(0,8)])
                 if randint(0,1) == 0:
                     tile[0] = tile[0].transform(FlipLeftRightTransform)
 
