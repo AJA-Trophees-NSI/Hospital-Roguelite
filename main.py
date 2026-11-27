@@ -1,6 +1,6 @@
 from arcade import *
 import arcade
-from random import randint
+from random import randint, random
 from arcade.texture.transforms import FlipLeftRightTransform
 
 # cSpell:ignore Roguelite
@@ -178,6 +178,7 @@ class Map:
             "def", # Default room
             "ele", # Elevator room
             "key", # Key room
+            "waiting", # Waiting room
         ]
         self.levelMap = []
         self.curLevel = 1
@@ -203,6 +204,12 @@ class Map:
         ]
 
         self.levelMap[randint(0,47)][0] = "key"
+        for room in self.buildLevel:
+            if room[0] == False:
+                if random() < 0.5:
+                    room[0] = "def"
+                else:
+                    room[0] = "waiting"
 
 class Player:
     """
