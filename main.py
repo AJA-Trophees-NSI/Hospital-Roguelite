@@ -54,6 +54,51 @@ class Game(Window):
             ]
         }
 
+        self.objects = {
+            "def": [
+                                                                                        ["M1D", (9,9)],
+                                                                                ["M1D", (9,8)], ["M1L", (8,9)],
+                                                                        ["M1D", (9,7)], [False, (8,8)], ["M1L", (7,9)],
+                                                                ["M1D", (9,6)], [False, (8,7)], [False, (7,8)], ["M1L", (6,9)],
+                                                        ["M1D", (9,5)], [False, (8,6)], [False, (7,7)], [False, (6,8)], ["M1L", (5,9)],
+                                                ["M1D", (9,4)], [False, (8,5)], [False, (7,6)], [False, (6,7)], [False, (5,8)], ["M1L", (4,9)],
+                                        ["M1D", (9,3)], [False, (8,4)], [False, (7,5)], [False, (6,6)], [False, (5,7)], [False, (4,8)], ["M1L", (3,9)],
+                                ["M1D", (9,2)], [False, (8,3)], [False, (7,4)], [False, (6,5)], [False, (5,6)], [False, (4,7)], [False, (3,8)], ["M1L", (2,9)],
+                        ["M1D", (9,1)], [False, (8,2)], [False, (7,3)], [False, (6,4)], [False, (5,5)], [False, (4,6)], [False, (3,7)], [False, (2,8)], ["M1L", (1,9)],
+                ["M1D", (9,0)], [False, (8,1)], [False, (7,2)], [False, (6,3)], [False, (5,4)], [False, (4,5)], [False, (3,6)], [False, (2,7)], [False, (1,8)], ["M1L", (0,9)],
+                        [False, (8,0)], [False, (7,1)], [False, (6,2)], [False, (5,3)], [False, (4,4)], [False, (3,5)], [False, (2,6)], [False, (1,7)], [False, (0,8)],
+                                [False, (7,0)], [False, (6,1)], [False, (5,2)], [False, (4,3)], [False, (3,4)], [False, (2,5)], [False, (1,6)], [False, (0,7)],
+                                        [False, (6,0)], [False, (5,1)], [False, (4,2)], [False, (3,3)], [False, (2,4)], [False, (1,5)], [False, (0,6)],
+                                                [False, (5,0)], [False, (4,1)], [False, (3,2)], [False, (2,3)], [False, (1,4)], [False, (0,5)],
+                                                        [False, (4,0)], [False, (3,1)], [False, (2,2)], [False, (1,3)], [False, (0,4)],
+                                                                [False, (3,0)], [False, (2,1)], [False, (1,2)], [False, (0,3)],
+                                                                        [False, (2,0)], [False, (1,1)], [False, (0,2)],
+                                                                                [False, (1,0)], [False, (0,1)],
+                                                                                        [False, (0,0)]
+            ],
+            "waiting": [
+                                                                                        [False, (9,9)],
+                                                                                [False, (9,8)], [False, (8,9)],
+                                                                        [False, (9,7)], [False, (8,8)], [False, (7,9)],
+                                                                [False, (9,6)], [False, (8,7)], [False, (7,8)], [False, (6,9)],
+                                                        [False, (9,5)], [False, (8,6)], [False, (7,7)], [False, (6,8)], [False, (5,9)],
+                                                [False, (9,4)], [False, (8,5)], [False, (7,6)], [False, (6,7)], [False, (5,8)], [False, (4,9)],
+                                        [False, (9,3)], [False, (8,4)], [False, (7,5)], [False, (6,6)], [False, (5,7)], [False, (4,8)], [False, (3,9)],
+                                [False, (9,2)], [False, (8,3)], [False, (7,4)], [False, (6,5)], [False, (5,6)], [False, (4,7)], [False, (3,8)], [False, (2,9)],
+                        [False, (9,1)], [False, (8,2)], [False, (7,3)], [False, (6,4)], [False, (5,5)], [False, (4,6)], [False, (3,7)], [False, (2,8)], [False, (1,9)],
+                [False, (9,0)], [False, (8,1)], [False, (7,2)], [False, (6,3)], [False, (5,4)], [False, (4,5)], [False, (3,6)], [False, (2,7)], [False, (1,8)], [False, (0,9)],
+                        [False, (8,0)], [False, (7,1)], [False, (6,2)], [False, (5,3)], [False, (4,4)], [False, (3,5)], [False, (2,6)], [False, (1,7)], [False, (0,8)],
+                                [False, (7,0)], [False, (6,1)], [False, (5,2)], [False, (4,3)], [False, (3,4)], [False, (2,5)], [False, (1,6)], [False, (0,7)],
+                                        [False, (6,0)], [False, (5,1)], [False, (4,2)], [False, (3,3)], [False, (2,4)], [False, (1,5)], [False, (0,6)],
+                                                [False, (5,0)], [False, (4,1)], [False, (3,2)], [False, (2,3)], [False, (1,4)], [False, (0,5)],
+                                                        [False, (4,0)], [False, (3,1)], [False, (2,2)], [False, (1,3)], [False, (0,4)],
+                                                                [False, (3,0)], [False, (2,1)], [False, (1,2)], [False, (0,3)],
+                                                                        [False, (2,0)], [False, (1,1)], [False, (0,2)],
+                                                                                [False, (1,0)], [False, (0,1)],
+                                                                                        [False, (0,0)]
+            ]
+        }
+
         super().__init__(800, 600, "Hospital Roguelite", resizable=True)
         sheet = load_spritesheet("pixilart/TileSet.png")
         self.w = 40
@@ -61,6 +106,10 @@ class Game(Window):
         self.tiles = {
             "ft1": [sheet.get_texture(LBWH(80, 0, 40, 19)),sheet.get_texture(LBWH(80, self.h*1, 40, 19)),sheet.get_texture(LBWH(80, self.h*2, 40, 19)), sheet.get_texture(LBWH(80, self.h*3, 40, 19)), sheet.get_texture(LBWH(80, self.h*4, 40, 19)),sheet.get_texture(LBWH(80, self.h*5, 40, 19)),sheet.get_texture(LBWH(80, self.h*6, 40, 19)), sheet.get_texture(LBWH(80, self.h*7, 40, 19)), sheet.get_texture(LBWH(80, self.h*8, 40, 19))],
             "ft2": [sheet.get_texture(LBWH(0, 0, 40, 19)),sheet.get_texture(LBWH(40, self.h*1, 40, 19)),sheet.get_texture(LBWH(40, self.h*2, 40, 19)), sheet.get_texture(LBWH(40, self.h*3, 40, 19)), sheet.get_texture(LBWH(40, self.h*4, 40, 19)),sheet.get_texture(LBWH(40, self.h*5, 40, 19)),sheet.get_texture(LBWH(40, self.h*6, 40, 19)), sheet.get_texture(LBWH(40, self.h*7, 40, 19)), sheet.get_texture(LBWH(40, self.h*8, 40, 19))]
+        }
+        self.objects = {
+            "M1D": [sheet.get_texture(LBWH(200,0,120,19))],
+            "M1L": [sheet.get_texture(LBWH(200,0,120,19))]
         }
 
         for room in self.rooms:
