@@ -1,6 +1,6 @@
 from arcade import *
 import arcade
-from random import *
+from random import randint
 from arcade.texture.transforms import FlipLeftRightTransform
 
 # cSpell:ignore Roguelite
@@ -10,7 +10,7 @@ class Game(Window):
 
     def __init__(self):
         self.rooms = {
-            "1": [
+            "def": [
                                                                                         ["ft1", (9,9)],
                                                                                 ["ft1", (9,8)], ["ft1", (8,9)],
                                                                         ["ft1", (9,7)], ["ft1", (8,8)], ["ft1", (7,9)],
@@ -145,6 +145,42 @@ class Game(Window):
         )
 
         self.camera.zoom = scale
+
+class Map:
+    """
+    The map setup handling class.
+    """
+
+    def __init__(self, difficulty):
+        self.rooms = [
+            "def", # Default room
+            "ele", # Elevator room
+            "key", # Key room
+        ]
+        self.levelMap = []
+        self.curLevel = 1
+        self.difficulty = difficulty
+
+    def buildLevel(self):
+        """Chooses which rooms are where according to the current level"""
+        self.levelMap = [
+                                                                [False, (6,6)],
+                                                        [False, (6,5)], [False, (5,6)],
+                                                [False, (6,4)], [False, (5,5)], [False, (4,6)],
+                                        [False, (6,3)], [False, (5,4)], [False, (4,5)], [False, (3,6)],
+                                [False, (6,2)], [False, (5,3)], [False, (4,4)], [False, (3,5)], [False, (2,6)],
+                        [False, (6,1)], [False, (5,2)], [False, (4,3)], [False, (3,4)], [False, (2,5)], [False, (1,6)],
+                [False, (6,0)], [False, (5,1)], [False, (4,2)],                 [False, (2,4)], [False, (1,5)], [False, (0,6)],
+                        [False, (5,0)], [False, (4,1)], [False, (3,2)], [False, (2,3)], [False, (1,4)], [False, (0,5)],
+                                [False, (4,0)], [False, (3,1)], [False, (2,2)], [False, (1,3)], [False, (0,4)],
+                                        [False, (3,0)], [False, (2,1)], [False, (1,2)], [False, (0,3)],
+                                                [False, (2,0)], [False, (1,1)], [False, (0,2)],
+                                                        [False, (1,0)], [False, (0,1)],
+                                                                [False, (0,0)],
+                ["ele", (3,3)]
+        ]
+
+        self.levelMap[randint(0,47)][0] = "key"
 
 class Player:
     """
