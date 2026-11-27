@@ -10,7 +10,7 @@ class Game(Window):
 
     def __init__(self):
         self.rooms = {
-            "1": [
+            "def": [
                                                                                         ["ft1", (9,9)],
                                                                                 ["ft1", (9,8)], ["ft1", (8,9)],
                                                                         ["ft1", (9,7)], ["ft1", (8,8)], ["ft1", (7,9)],
@@ -30,6 +30,27 @@ class Game(Window):
                                                                         ["ft1", (2,0)], ["ft1", (1,1)], ["ft1", (0,2)],
                                                                                 ["ft1", (1,0)], ["ft1", (0,1)],
                                                                                         ["ft1", (0,0)]
+            ],
+            "waiting": [
+                                                                                        ["ft2", (9,9)],
+                                                                                ["ft2", (9,8)], ["ft2", (8,9)],
+                                                                        ["ft2", (9,7)], ["ft2", (8,8)], ["ft2", (7,9)],
+                                                                ["ft2", (9,6)], ["ft2", (8,7)], ["ft2", (7,8)], ["ft2", (6,9)],
+                                                        ["ft2", (9,5)], ["ft2", (8,6)], ["ft2", (7,7)], ["ft2", (6,8)], ["ft2", (5,9)],
+                                                ["ft2", (9,4)], ["ft2", (8,5)], ["ft2", (7,6)], ["ft2", (6,7)], ["ft2", (5,8)], ["ft2", (4,9)],
+                                        ["ft2", (9,3)], ["ft2", (8,4)], ["ft2", (7,5)], ["ft2", (6,6)], ["ft2", (5,7)], ["ft2", (4,8)], ["ft2", (3,9)],
+                                ["ft2", (9,2)], ["ft2", (8,3)], ["ft2", (7,4)], ["ft2", (6,5)], ["ft2", (5,6)], ["ft2", (4,7)], ["ft2", (3,8)], ["ft2", (2,9)],
+                        ["ft2", (9,1)], ["ft2", (8,2)], ["ft2", (7,3)], ["ft2", (6,4)], ["ft2", (5,5)], ["ft2", (4,6)], ["ft2", (3,7)], ["ft2", (2,8)], ["ft2", (1,9)],
+                ["ft2", (9,0)], ["ft2", (8,1)], ["ft2", (7,2)], ["ft2", (6,3)], ["ft2", (5,4)], ["ft2", (4,5)], ["ft2", (3,6)], ["ft2", (2,7)], ["ft2", (1,8)], ["ft2", (0,9)],
+                        ["ft2", (8,0)], ["ft2", (7,1)], ["ft2", (6,2)], ["ft2", (5,3)], ["ft2", (4,4)], ["ft2", (3,5)], ["ft2", (2,6)], ["ft2", (1,7)], ["ft2", (0,8)],
+                                ["ft2", (7,0)], ["ft2", (6,1)], ["ft2", (5,2)], ["ft2", (4,3)], ["ft2", (3,4)], ["ft2", (2,5)], ["ft2", (1,6)], ["ft2", (0,7)],
+                                        ["ft2", (6,0)], ["ft2", (5,1)], ["ft2", (4,2)], ["ft2", (3,3)], ["ft2", (2,4)], ["ft2", (1,5)], ["ft2", (0,6)],
+                                                ["ft2", (5,0)], ["ft2", (4,1)], ["ft2", (3,2)], ["ft2", (2,3)], ["ft2", (1,4)], ["ft2", (0,5)],
+                                                        ["ft2", (4,0)], ["ft2", (3,1)], ["ft2", (2,2)], ["ft2", (1,3)], ["ft2", (0,4)],
+                                                                ["ft2", (3,0)], ["ft2", (2,1)], ["ft2", (1,2)], ["ft2", (0,3)],
+                                                                        ["ft2", (2,0)], ["ft2", (1,1)], ["ft2", (0,2)],
+                                                                                ["ft2", (1,0)], ["ft2", (0,1)],
+                                                                                        ["ft2", (0,0)]
             ]
         }
 
@@ -38,7 +59,8 @@ class Game(Window):
         self.w = 40
         self.h = 19
         self.tiles = {
-            "ft1": [sheet.get_texture(LBWH(80, 0, 40, 19)),sheet.get_texture(LBWH(80, self.h*1, 40, 19)),sheet.get_texture(LBWH(80, self.h*2, 40, 19)), sheet.get_texture(LBWH(80, self.h*3, 40, 19)), sheet.get_texture(LBWH(80, self.h*4, 40, 19)),sheet.get_texture(LBWH(80, self.h*5, 40, 19)),sheet.get_texture(LBWH(80, self.h*6, 40, 19)), sheet.get_texture(LBWH(80, self.h*7, 40, 19)), sheet.get_texture(LBWH(80, self.h*8, 40, 19))]
+            "ft1": [sheet.get_texture(LBWH(80, 0, 40, 19)),sheet.get_texture(LBWH(80, self.h*1, 40, 19)),sheet.get_texture(LBWH(80, self.h*2, 40, 19)), sheet.get_texture(LBWH(80, self.h*3, 40, 19)), sheet.get_texture(LBWH(80, self.h*4, 40, 19)),sheet.get_texture(LBWH(80, self.h*5, 40, 19)),sheet.get_texture(LBWH(80, self.h*6, 40, 19)), sheet.get_texture(LBWH(80, self.h*7, 40, 19)), sheet.get_texture(LBWH(80, self.h*8, 40, 19))],
+            "ft2": [sheet.get_texture(LBWH(0, 0, 40, 19)),sheet.get_texture(LBWH(40, self.h*1, 40, 19)),sheet.get_texture(LBWH(40, self.h*2, 40, 19)), sheet.get_texture(LBWH(40, self.h*3, 40, 19)), sheet.get_texture(LBWH(40, self.h*4, 40, 19)),sheet.get_texture(LBWH(40, self.h*5, 40, 19)),sheet.get_texture(LBWH(40, self.h*6, 40, 19)), sheet.get_texture(LBWH(40, self.h*7, 40, 19)), sheet.get_texture(LBWH(40, self.h*8, 40, 19))]
         }
 
         for room in self.rooms:
@@ -110,7 +132,7 @@ class Game(Window):
         self.clear()
         self.camera.use()
 
-        for tile, (x, y) in self.rooms["1"]:
+        for tile, (x, y) in self.rooms["def"]:
             screenX = (-x + y) * self.w / 2
             screenY = (x + y) * self.h / 2
 
