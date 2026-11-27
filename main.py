@@ -161,46 +161,6 @@ class Player:
         self.x = max(0.5, min(10.0, self.x + dx * self.speed * delta_time))
         self.y = max(0.5, min(10.0, self.y + dy * self.speed * delta_time))
 
-        screenX = (-self.player.x + self.player.y) * self.w / 2
-        screenY = (self.player.x + self.player.y) * self.h / 2
-
-        draw_texture_rect(
-            self.player.texture,
-            XYWH(
-                screenX,
-                screenY - self.h / 2,
-                24,
-                33,
-            )
-        )
-
-    def on_resize(self, width, height):
-        super().on_resize(width, height)
-
-        self.camera.match_window()
-
-        scale = min(
-            width / 800,
-            height / 600,
-        )
-
-        self.camera.zoom = scale
-
-class Player:
-    """
-    The player handling class.
-    """
-
-    def __init__(self):
-        self.x = 5
-        self.y = 5
-        self.speed = 3.0
-        self.texture = load_texture("pixilart/tempPlayer.png")
-
-    def move(self, dx, dy, delta_time):
-        self.x = max(0.5, min(10.0, self.x + dx * self.speed * delta_time))
-        self.y = max(0.5, min(10.0, self.y + dy * self.speed * delta_time))
-
 
 
 if __name__ == "__main__":
